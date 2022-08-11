@@ -1,19 +1,26 @@
 const express = require("express");
-const { v4 } = require("uuid");
-const { createError } = require("../../helpers");
-const Joi = require("joi");
 
-const contactSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.string().required(),
-});
-
-const contactsOperations = require("../../models/contacts");
+const ctrl = require("../../controllers/contacts");
+const { ctrlWrapper } = require("../../helpers");
 
 const router = express.Router();
 
-router.get("/", async (req, res, next) => {
+
+router.get("/", ctrlWrapper(ctrl.listContacts))
+
+router.get("/:contactId", ctrlWrapper(ctrl.getContactById))
+
+router.post("/", ctrlWrapper(ctrl.addContact))
+
+router.delete("/:contactId", ctrlWrapper(ctrl.removeContact))
+
+router.put("/:contactId", ctrlWrapper(ctrl.updateContact))
+
+module.exports = router;
+
+
+
+/* router.get("/", async (req, res, next) => {
   try {
     const contacts = await contactsOperations.listContacts();
     res.json({
@@ -107,6 +114,4 @@ router.put("/:contactId", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
-
-module.exports = router;
+}); */
