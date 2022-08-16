@@ -1,20 +1,22 @@
 const { Contact } = require("../../models/contacts");
 const { createError } = require("../../middlewares");
 
-const removeContact = async (req, res) => {
+const updateStatusFavorite = async (req, res) => {
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndRemove(contactId);
+  const { favorite } = req.body;
+  const result = await Contact.findByIdAndUpdate(contactId, {favorite}, {
+    new: true,
+  });
   if (!result) {
     throw createError(404, `contact with id=${contactId} not found`);
   }
   res.json({
     status: "success",
     code: 200,
-    message: "contact deleted",
     data: {
       result,
     },
   });
 };
 
-module.exports = removeContact;
+module.exports = updateStatusFavorite;
