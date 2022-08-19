@@ -1,5 +1,4 @@
 const { basedir } = global;
-
 const { Contact } = require(`${basedir}/models`);
 
 const listContacts = async (req, res) => {

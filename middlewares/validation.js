@@ -1,5 +1,4 @@
 const { basedir } = global;
-
 const {createError} = require(`${basedir}/helpers`);
 
 const validation = (schema) => {
