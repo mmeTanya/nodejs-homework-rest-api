@@ -1,5 +1,6 @@
-const { Contact } = require("../../models/contacts");
-const { createError } = require("../../middlewares");
+const { basedir } = global;
+const { Contact } = require(`${basedir}/models`);
+const { createError } = require(`${basedir}/helpers`);
 
 const getContactById = async (req, res) => {
   const { contactId } = req.params;
@@ -16,4 +17,4 @@ const getContactById = async (req, res) => {
   });
 };
 
-module.exports = getContactById
+module.exports = getContactById;

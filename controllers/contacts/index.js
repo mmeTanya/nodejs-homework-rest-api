@@ -5,12 +5,11 @@ const removeContact = require("./removeContact");
 const updateContact = require("./updateContact");
 const updateStatusFavorite = require("./updateStatusFavorite");
 
-
 module.exports = {
   listContacts,
   getContactById,
   addContact,
   removeContact,
   updateContact,
-  updateStatusFavorite
-}
+  updateStatusFavorite,
+};
