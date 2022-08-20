@@ -1,6 +1,6 @@
 const express = require("express");
 const { basedir } = global;
-const { auth, validation, ctrlWrapper } = require(`${basedir}/middlewares`);
+const { auth, validation, upload, ctrlWrapper } = require(`${basedir}/middlewares`);
 const { users: ctrl } = require(`${basedir}/controllers`);
 const { joiSubscriptionSchema } = require(`${basedir}/models/user`);
 
@@ -14,5 +14,7 @@ router.patch(
     validation(joiSubscriptionSchema),
     ctrlWrapper(ctrl.updateSubscription)
   );
+
+  router.patch("/avatars", auth, upload.single("avatar"), ctrlWrapper(ctrl.setAvatar));
 
 module.exports = router;

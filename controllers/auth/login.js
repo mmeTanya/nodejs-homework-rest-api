@@ -1,7 +1,7 @@
 const { Unauthorized } = require("http-errors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const {basedir} = global
+const { basedir } = global;
 
 const { User } = require(`${basedir}/models`);
 
