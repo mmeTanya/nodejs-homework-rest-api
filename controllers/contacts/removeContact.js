@@ -1,4 +1,4 @@
-const {basedir} = global
+const { basedir } = global;
 const { Contact } = require(`${basedir}/models`);
 const { createError } = require(`${basedir}/helpers`);
 

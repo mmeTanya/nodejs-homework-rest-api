@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { basedir } = global;
 
 const { User } = require(`${basedir}/models`);
-const {createError} = require(`${basedir}/helpers`);
+const { createError } = require(`${basedir}/helpers`);
 
 const { SECRET_KEY } = process.env;
 
@@ -10,7 +10,7 @@ const auth = async (req, res, next) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
   try {
-    if (bearer !== "Bearer") {
+    if (bearer !== "Bearer" || !token) {
       throw createError(404, "Not authorized");
     }
     const { id } = jwt.verify(token, SECRET_KEY);
