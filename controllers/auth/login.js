@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const { basedir } = global;
 
 const { User } = require(`${basedir}/models`);
-
+const {createError} = require(`${basedir}/helpers`);
 const { SECRET_KEY } = process.env;
 
 const login = async (req, res) => {
@@ -13,7 +13,9 @@ const login = async (req, res) => {
   if (!user) {
     throw new Unauthorized(`Email ${email} not found`);
   }
-
+  if (!user.verify) {
+    throw createError(401, "Email not verify");
+  }
   const passCompare = bcrypt.compareSync(password, user.password);
   if (!passCompare) {
     throw new Unauthorized("password is wrong");
